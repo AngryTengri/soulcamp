@@ -39,6 +39,12 @@
     html { scroll-behavior: smooth; overflow-x: clip; }
     body { overflow-x: clip; }
     body { font-family: var(--sans); color: var(--fg); background: var(--bg); line-height: 1.4; -webkit-font-smoothing: antialiased; }
+    /* Film grain over the whole page */
+    body::after { content: ""; position: fixed; inset: -50%; z-index: 100; pointer-events: none; opacity: .2; mix-blend-mode: screen;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.4' intercept='-0.6'/%3E%3CfeFuncG type='linear' slope='2.4' intercept='-0.6'/%3E%3CfeFuncB type='linear' slope='2.4' intercept='-0.6'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grain 1s steps(4) infinite; }
+    @keyframes grain { 0% { transform: translate(0, 0); } 25% { transform: translate(-3%, 2%); } 50% { transform: translate(2%, -3%); } 75% { transform: translate(-2%, -1%); } 100% { transform: translate(0, 0); } }
+    @media (prefers-reduced-motion: reduce) { body::after { animation: none; } }
     ::selection { background: var(--cyan); color: #000; }
     img { display: block; max-width: 100%; }
     a { color: inherit; }
@@ -81,8 +87,8 @@
 
     /* DOC — simple, Notion-style content below the landing screen */
     .doc { width: min(var(--content), 100% - 2 * var(--gutter)); margin: 0 auto; padding: 72px 0 48px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.65; }
-    .doc { --stack: clamp(40px, 5vw, 72px); }  /* equal spacing between intro, prizes, BEST WORKS and categories */
-    .doc section { margin-top: clamp(56px, 7vw, 96px); scroll-margin-top: 72px; }
+    .doc { --stack: clamp(56px, 7vw, 104px); --section: clamp(112px, 14vw, 200px); }  /* equal spacing between intro, prizes, BEST WORKS and categories */
+    .doc section { margin-top: var(--section); scroll-margin-top: 72px; }
     .doc #categories { margin-top: var(--stack); }
     #about .statement { text-align: center; }
     .doc section:first-child { margin-top: 0; }
@@ -98,32 +104,32 @@
     .doc .statement { font-family: var(--sans); font-size: clamp(20px, 4vw, 58px); font-weight: 700; letter-spacing: -0.05em; line-height: 1; color: var(--cyan); margin: 0; }
     .doc .prize-note { text-align: center; font-family: var(--sans); font-size: clamp(20px, 4vw, 58px); font-weight: 700; letter-spacing: -0.05em; line-height: 1; color: var(--cyan); margin: var(--stack) 0 0; }
     /* Outlined boxes (categories, steps, schedule, contact) — same outline as APPLY */
-    .cats, .boxes { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 24px); margin-top: 40px; align-items: stretch; }
+    .cats, .boxes { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 2.4vw, 32px); margin-top: 40px; align-items: stretch; }
     .boxes { margin-top: 0; }
-    .cat-words { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 40px); text-align: center; margin-bottom: clamp(56px, 7vw, 96px); }
+    .cat-words { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 40px); text-align: center; margin-bottom: var(--section); }
     .doc .cat-words h3 { font-size: clamp(28px, 5.5vw, 76px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: #fff; margin: 0 0 12px; }
     .cat-words p { font-size: 14px; color: var(--muted); margin: 0 auto; max-width: 260px; }
-    @media (max-width: 560px) { .cat-words { grid-template-columns: 1fr; gap: 28px; } }
-    .boxes.perks { margin-top: clamp(16px, 2vw, 24px); }
-    .doc .lead-in { font-size: 17px; color: var(--fg); max-width: 760px; margin: 0; }
+    @media (max-width: 560px) { .cat-words { grid-template-columns: 1fr; gap: 40px; } }
+    .boxes.perks { margin-top: clamp(32px, 4vw, 48px); }
+    .doc .lead-in { font-size: 18px; line-height: 1.7; color: var(--fg); max-width: 760px; margin: 0; }
     .cats .step { display: block; font-size: 13px; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; }
     .boxes.two { grid-template-columns: repeat(2, 1fr); }
-    .cats > div, .boxes > div { border: 2px solid var(--cyan); border-radius: 14px; padding: clamp(18px, 2vw, 28px); }
-    .doc .cats h3, .doc .boxes h3 { font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; color: var(--cyan); margin: 0 0 10px; }
+    .cats > div, .boxes > div { border: 2px solid var(--cyan); border-radius: 14px; padding: clamp(24px, 2.8vw, 40px); }
+    .doc .cats h3, .doc .boxes h3 { font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; color: var(--cyan); margin: 0 0 16px; }
     .cats ul { list-style: none; padding: 0; margin: 0; color: var(--muted); font-size: 15px; }
     .cats li { margin: 2px 0; }
-    .boxes p { color: var(--muted); font-size: 15px; margin: 0; }
-    .boxes .step { display: block; font-size: 13px; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; }
+    .boxes p { color: var(--muted); font-size: 15px; line-height: 1.7; margin: 0; }
+    .boxes .step { display: block; font-size: 13px; letter-spacing: .08em; color: var(--muted); margin-bottom: 14px; }
     .times { list-style: none; padding: 0 !important; margin: 0; font-size: 15px; }
-    .times li { display: flex; gap: 16px; padding: 8px 0; border-top: 1px solid var(--line); margin: 0; }
+    .times li { display: flex; gap: 20px; padding: 14px 0; border-top: 1px solid var(--line); margin: 0; }
     .times li:first-child { border-top: 0; padding-top: 0; }
     .times time { width: 48px; flex: none; color: var(--cyan); font-variant-numeric: tabular-nums; }
-    .doc .kicker { font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; letter-spacing: -0.01em; color: var(--fg); margin: 0 0 16px; }
-    .doc .aside { margin-top: 16px; font-size: 15px; color: var(--fg); }
+    .doc .kicker { font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; letter-spacing: -0.01em; color: var(--fg); margin: 0 0 clamp(24px, 3vw, 36px); }
+    .doc .aside { margin-top: clamp(24px, 3vw, 36px); font-size: 15px; line-height: 1.7; color: var(--fg); }
     .doc .aside b { color: var(--cyan); letter-spacing: .06em; font-size: 13px; margin-right: 6px; }
     .faq-list { border-top: 2px solid var(--cyan); }
     .faq-list .toggle { border-bottom: 1px solid var(--line); border-radius: 0; margin: 0; }
-    .faq-list .toggle summary { padding: 14px 4px; font-size: 17px; font-weight: 500; }
+    .faq-list .toggle summary { padding: 22px 4px; font-size: 17px; font-weight: 500; }
     .faq-list .toggle[open] summary { color: var(--cyan); }
     @media (max-width: 760px) { .boxes, .boxes.two { grid-template-columns: 1fr; } }
     @media (max-width: 560px) { .cats { grid-template-columns: 1fr; gap: 20px; } }
@@ -150,9 +156,9 @@
     .toggle summary::before { content: "▸"; color: var(--muted); font-size: 13px; width: 12px; flex: none; transition: transform .15s; display: inline-block; }
     .toggle[open] summary::before { transform: rotate(90deg); }
     .toggle summary:hover { background: rgba(143,221,231,.06); }
-    .toggle p { margin: 2px 0 10px 24px; color: #c9dcdf; }
+    .toggle p { margin: 0 0 22px 24px; line-height: 1.7; color: #c9dcdf; }
 
-    .doc-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+    .doc-foot { display: flex; justify-content: space-between; align-items: center; margin-top: var(--section); padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
     .doc-foot img { height: 13px; width: auto; }
   </style>
 </head>
@@ -205,8 +211,7 @@
         <div><h3>FASHION</h3><p>360-degree campaign · collection · lookbook · set design · short film</p></div>
         <div><h3>TECH</h3><p>a new product</p></div>
       </div>
-      <p class="kicker">ABOUT THE CAMP</p>
-      <p class="lead-in">Two days in Almaty: workshops and a panel with industry professionals, then a 24-hour challenge to make something real in one of three categories. It’s free to join — food, drinks and AI tools are included. Travel and accommodation are not included.</p>
+      <p class="statement">TWO DAYS TO CREATE: WORKSHOPS AND A PANEL WITH INDUSTRY PROFESSIONALS, THEN A <span style="white-space:nowrap">24-HOUR</span> CHALLENGE TO MAKE SOMETHING REAL IN ONE OF THREE CATEGORIES. IT’S FREE TO JOIN: FOOD, DRINKS AND AI TOOLS ARE INCLUDED.</p>
       <div class="boxes perks">
         <div><h3>NEW SKILLS</h3><p>Learn to create with AI tools, taught by professionals.</p></div>
         <div><h3>MENTORSHIP</h3><p>Guidance and feedback from industry professionals.</p></div>
