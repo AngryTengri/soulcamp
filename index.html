@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SOUL CAMP — Almaty, Nov 21–22</title>
-  <meta name="description" content="A creative contest for girls to learn AI tools and create a project in 24 hours. November 21–22, 2026, Almaty.">
+  <meta name="description" content="A creative contest for girls to learn AI tools and generate a project in 24 hours. November 21–22, 2026, Almaty.">
   <meta name="theme-color" content="#000000">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000'/%3E%3Ctext x='16' y='23' font-family='Helvetica,Arial' font-weight='700' font-size='18' text-anchor='middle' fill='%238fdde7'%3ES%3C/text%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="assets/trophy.png">
   <!-- Link previews (Telegram, Instagram, WhatsApp…). Update the URLs if you use a custom domain. -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="SOUL CAMP — Almaty, Nov 21–22">
-  <meta property="og:description" content="A creative contest for girls to learn AI tools and create a project in 24 hours.">
+  <meta property="og:description" content="A creative contest for girls to learn AI tools and generate a project in 24 hours.">
   <meta property="og:url" content="https://angrytengri.github.io/soulcamp/">
   <meta property="og:image" content="https://angrytengri.github.io/soulcamp/assets/trophy.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -39,6 +39,13 @@
     html { scroll-behavior: smooth; overflow-x: clip; }
     body { overflow-x: clip; }
     body { font-family: var(--sans); color: var(--fg); background: var(--bg); line-height: 1.4; -webkit-font-smoothing: antialiased; }
+    /* Sticky APPLY on phones — shows once both APPLY buttons are off screen */
+    .sticky-apply { display: none; }
+    @media (max-width: 760px) {
+      .sticky-apply { display: block; position: fixed; left: 16px; right: 16px; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 50; text-align: center; padding: 16px 0; border-radius: 14px; background: var(--cyan); color: #000; text-decoration: none; font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 18px; letter-spacing: .14em; text-indent: .14em; box-shadow: 0 8px 30px rgba(0,0,0,.6); transform: translateY(140%); opacity: 0; transition: transform .3s ease, opacity .3s ease; }
+      .sticky-apply.show { transform: none; opacity: 1; }
+      .doc { padding-bottom: 96px; }
+    }
     /* Film grain over the whole page */
     body::after { content: ""; position: fixed; inset: -50%; z-index: 100; pointer-events: none; opacity: .2; mix-blend-mode: screen;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.4' intercept='-0.6'/%3E%3CfeFuncG type='linear' slope='2.4' intercept='-0.6'/%3E%3CfeFuncB type='linear' slope='2.4' intercept='-0.6'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -65,9 +72,9 @@
     .hero .brand { display: flex; flex-direction: column; align-items: center; gap: clamp(32px, 4vw, 60px); position: relative; z-index: 1; }
     .hero .brand h1 { width: min(100%, 740px); }
     .hero .brand h1 img { width: 100%; height: auto; }
-    .hero .apply { display: inline-block; border: 2px solid var(--cyan); border-radius: 14px; padding: clamp(14px, 1.4vw, 22px) clamp(28px, 3vw, 48px); transition: background .25s, box-shadow .25s, transform .25s; }
-    .hero .apply { font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 300; font-size: clamp(24px, 2.4vw, 40px); letter-spacing: .12em; text-indent: .12em; line-height: 1; color: var(--cyan); text-decoration: none; }
-    .hero .apply:hover { background: rgba(143,221,231,.1); box-shadow: 0 0 28px rgba(143,221,231,.35); transform: translateY(-2px); }
+    .apply { display: inline-block; border: 2px solid var(--cyan); border-radius: 14px; padding: clamp(14px, 1.4vw, 22px) clamp(28px, 3vw, 48px); transition: background .25s, box-shadow .25s, transform .25s; }
+    .apply { font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 300; font-size: clamp(24px, 2.4vw, 40px); letter-spacing: .12em; text-indent: .12em; line-height: 1; color: var(--cyan); text-decoration: none; }
+    .apply:hover { background: rgba(143,221,231,.1); box-shadow: 0 0 28px rgba(143,221,231,.35); transform: translateY(-2px); }
     .hero .foot { position: absolute; left: var(--side); right: var(--side); bottom: 28px; display: flex; justify-content: flex-end; gap: 28px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); z-index: 2; }
     .hero .foot b { color: var(--cyan); font-weight: 500; }
     /* Countdown under APPLY: numbers first, then the unit */
@@ -89,7 +96,14 @@
     .doc { width: min(var(--content), 100% - 2 * var(--gutter)); margin: 0 auto; padding: 72px 0 48px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 17px; line-height: 1.65; }
     .doc { --stack: clamp(56px, 7vw, 104px); --section: clamp(112px, 14vw, 200px); }  /* equal spacing between intro, prizes, BEST WORKS and categories */
     .doc section { margin-top: var(--section); scroll-margin-top: 72px; }
-    .doc #categories { margin-top: var(--stack); }
+    .doc #categories { margin-top: var(--section); }
+    .doc .roles { font-size: clamp(16px, 2vw, 28px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; color: var(--cyan); margin: clamp(20px, 2.4vw, 32px) 0 0; }
+    .will { list-style: none; padding: 0 !important; margin: 0; }
+    .doc .will li { font-size: clamp(20px, 4vw, 58px); font-weight: 700; letter-spacing: -0.05em; line-height: 1.05; color: var(--cyan); margin: 0; padding: clamp(20px, 2.6vw, 36px) 0; border-top: 1px solid var(--line); padding-left: 0; }
+    .will.numbered li { display: flex; align-items: baseline; gap: clamp(16px, 2vw, 32px); }
+    .will .num { font-size: clamp(13px, 1.2vw, 16px); letter-spacing: .08em; color: var(--muted); font-weight: 500; flex: none; }
+    .doc .will li:first-child { border-top: 0; padding-top: 0; }
+    .doc .will li:last-child { padding-bottom: 0; }
     #about .statement { text-align: center; }
     .doc section:first-child { margin-top: 0; }
     .doc h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; color: var(--cyan); margin-bottom: 10px; }
@@ -108,12 +122,15 @@
     .boxes { margin-top: 0; }
     .cat-words { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 40px); text-align: center; margin-bottom: var(--section); }
     .doc .cat-words h3 { font-size: clamp(28px, 5.5vw, 76px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: #fff; margin: 0 0 12px; }
-    .cat-words p { font-size: 14px; color: var(--muted); margin: 0 auto; max-width: 260px; }
+    .cat-words p { font-size: 16px; line-height: 1.6; color: var(--muted); margin: 0 auto; max-width: 280px; }
+    .doc .cat-title { margin: 0 0 var(--stack); }
     @media (max-width: 560px) { .cat-words { grid-template-columns: 1fr; gap: 40px; } }
-    .boxes.perks { margin-top: clamp(32px, 4vw, 48px); }
+    .boxes.perks { margin-top: 0; }
     .doc .lead-in { font-size: 18px; line-height: 1.7; color: var(--fg); max-width: 760px; margin: 0; }
     .cats .step { display: block; font-size: 13px; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; }
     .boxes.two { grid-template-columns: repeat(2, 1fr); }
+    .boxes.four { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 1000px) { .boxes.four { grid-template-columns: repeat(2, 1fr); } }
     .cats > div, .boxes > div { border: 2px solid var(--cyan); border-radius: 14px; padding: clamp(24px, 2.8vw, 40px); }
     .doc .cats h3, .doc .boxes h3 { font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; color: var(--cyan); margin: 0 0 16px; }
     .cats ul { list-style: none; padding: 0; margin: 0; color: var(--muted); font-size: 15px; }
@@ -126,15 +143,25 @@
     .times time { width: 48px; flex: none; color: var(--cyan); font-variant-numeric: tabular-nums; }
     .doc .kicker { font-size: clamp(20px, 2.2vw, 28px); font-weight: 700; letter-spacing: -0.01em; color: var(--fg); margin: 0 0 clamp(24px, 3vw, 36px); }
     .doc .aside { margin-top: clamp(24px, 3vw, 36px); font-size: 15px; line-height: 1.7; color: var(--fg); }
+    .closing { text-align: center; }
+    .doc .closing .apply { margin-top: var(--stack); border-bottom: 2px solid var(--cyan); }
+    .contact-label { font-size: 13px !important; letter-spacing: .08em; color: var(--muted); margin: 0 0 12px !important; }
+    .contact-list { list-style: none; padding: 0 !important; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 40px; font-size: 14px; }
+    .contact-list li { margin: 0; padding: 0; }
+    .contact-list span { color: var(--muted); margin-right: 8px; }
+    .doc .contact-small { margin-top: var(--stack); }
+    .doc .note-small { margin-top: 12px; font-size: 13px; color: var(--muted); }
     .doc .aside b { color: var(--cyan); letter-spacing: .06em; font-size: 13px; margin-right: 6px; }
     .faq-list { border-top: 2px solid var(--cyan); }
     .faq-list .toggle { border-bottom: 1px solid var(--line); border-radius: 0; margin: 0; }
     .faq-list .toggle summary { padding: 22px 4px; font-size: 17px; font-weight: 500; }
     .faq-list .toggle[open] summary { color: var(--cyan); }
-    @media (max-width: 760px) { .boxes, .boxes.two { grid-template-columns: 1fr; } }
+    @media (max-width: 760px) { .boxes, .boxes.two, .boxes.four { grid-template-columns: 1fr; } }
     @media (max-width: 560px) { .cats { grid-template-columns: 1fr; gap: 20px; } }
     /* Prize amounts */
-    .nn { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 8px clamp(20px, 5vw, 72px); margin: var(--stack) 0 0; }
+    .nn { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 8px clamp(20px, 5vw, 72px); margin: var(--stack) 0 0; }
+    .prize { display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1vw, 14px); }
+    .prize .place { font-size: clamp(11px, 1vw, 14px); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
     .nn-node { font-family: var(--sans); font-size: clamp(22px, 5.5vw, 76px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
 
     .doc hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
@@ -167,10 +194,9 @@
   <nav class="nav" id="nav">
     <div class="links">
       <a href="#about">About</a>
-      <a href="#categories">Categories</a>
-      <a href="#schedule">Schedule</a>
       <a href="#who">Who</a>
-      <a href="#faq">FAQ</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#faq">Questions</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
@@ -196,30 +222,47 @@
   <main class="doc">
 
     <section id="about">
-      <p class="statement">A CREATIVE CONTEST FOR GIRLS TO LEARN AI TOOLS AND CREATE A PROJECT IN <span style="white-space:nowrap">24 HOURS</span></p>
-      <div class="nn" aria-label="Prizes: $10,000, $5,000 and $2,000">
-        <div class="nn-node">$10,000</div>
-        <div class="nn-node">$5,000</div>
-        <div class="nn-node">$2,000</div>
+      <p class="statement">A CREATIVE CONTEST FOR GIRLS TO LEARN AI TOOLS AND GENERATE A PROJECT IN <span style="white-space:nowrap">24 HOURS</span></p>
+      <p class="prize-note">BEST WORKS WIN PRIZES</p>
+      <div class="nn" aria-label="Prizes: 1st place $10,000, 2nd place $5,000, 3rd place $2,000">
+        <div class="prize"><span class="nn-node">$10,000</span><span class="place">1st place</span></div>
+        <div class="prize"><span class="nn-node">$5,000</span><span class="place">2nd place</span></div>
+        <div class="prize"><span class="nn-node">$2,000</span><span class="place">3rd place</span></div>
       </div>
-      <p class="prize-note">BEST WORK IN EACH CATEGORY WIN PRIZES</p>
     </section>
 
     <section id="categories">
-      <div class="cat-words">
-        <div><h3>FILM</h3><p>series · animation · short film</p></div>
-        <div><h3>FASHION</h3><p>360-degree campaign · collection · lookbook · set design · short film</p></div>
-        <div><h3>TECH</h3><p>a new product</p></div>
+      <p class="kicker">OVER TWO DAYS, YOU WILL:</p>
+      <ol class="will">
+        <li>LEARN AI TOOLS FROM EXPERTS</li>
+        <li>MAKE A FILM, FASHION CAMPAIGN, OR TECH PRODUCT</li>
+        <li>PRESENT YOUR WORK</li>
+      </ol>
+    </section>
+
+    <section id="perks">
+      <p class="kicker">WHY PARTICIPATE?</p>
+      <div class="boxes perks four">
+        <div><h3>LEARN AI TOOLS</h3><p>from Higgsfield Soul team</p></div>
+        <div><h3>RECEIVE FEEDBACK</h3><p>from industry professionals</p></div>
+        <div><h3>CREATE A PROJECT</h3><p>in one weekend</p></div>
+        <div><h3>MEET CREATIVES</h3><p>and make friends</p></div>
       </div>
-      <p class="statement">TWO DAYS TO CREATE: WORKSHOPS AND A PANEL WITH INDUSTRY PROFESSIONALS, THEN A <span style="white-space:nowrap">24-HOUR</span> CHALLENGE TO MAKE SOMETHING REAL IN ONE OF THREE CATEGORIES. IT’S FREE TO JOIN: FOOD, DRINKS AND AI TOOLS ARE INCLUDED.</p>
-      <div class="boxes perks">
-        <div><h3>NEW SKILLS</h3><p>Learn to create with AI tools, taught by professionals.</p></div>
-        <div><h3>MENTORSHIP</h3><p>Guidance and feedback from industry professionals.</p></div>
-        <div><h3>A FINISHED PROJECT</h3><p>Turn an idea into a real project in one weekend.</p></div>
-        <div><h3>CONNECTIONS</h3><p>Meet creatives, make friends and get noticed.</p></div>
-        <div><h3>PRIZES</h3><p>Top 3 in each category, plus special contests.</p></div>
-        <div><h3>A GREAT WEEKEND</h3><p>Chill zone, food zone, bubble tea and matcha station.</p></div>
-      </div>
+    </section>
+
+    <section id="who">
+      <p class="kicker">WHO CAN APPLY</p>
+      <p class="statement">Girls aged 18+, solo or in teams of up to 4. No AI experience needed.</p>
+      <p class="roles">Designers, stylists, photographers, writers, creators, and anyone with taste.</p>
+    </section>
+
+    <section id="how">
+      <p class="kicker">HOW TO JOIN</p>
+      <ol class="will numbered">
+        <li><span class="num">01</span>APPLY</li>
+        <li><span class="num">02</span>GET SELECTED</li>
+        <li><span class="num">03</span>CREATE</li>
+      </ol>
     </section>
 
     <section id="schedule">
@@ -228,66 +271,62 @@
         <div>
           <h3>DAY 1 · NOV 21</h3>
           <ul class="times">
-            <li><time>10:00</time>Registration and tastings</li>
+            <li><time>10:00</time>Registration</li>
             <li><time>11:30</time>Panel and workshops</li>
-            <li><time>14:00</time>The challenge starts</li>
+            <li><time>14:00</time>Brief drops</li>
             <li><time>19:00</time>Sessions with mentors</li>
           </ul>
         </div>
         <div>
           <h3>DAY 2 · NOV 22</h3>
           <ul class="times">
-            <li><time>14:00</time>Finish and submit</li>
-            <li><time>17:00</time>Project showcase and feedback</li>
+            <li><time>14:00</time>Submission closes</li>
+            <li><time>17:00</time>Project showcase</li>
             <li><time>20:00</time>Awards</li>
             <li><time>21:00</time>Afterparty</li>
           </ul>
         </div>
       </div>
-      <p class="aside"><b>ALL WEEKEND</b> work zone, chill zone, food zone, bubble tea and matcha station, and a desk to ask the SOUL team anything. <span class="muted">Timing may change.</span></p>
-    </section>
-
-    <section id="who">
-      <p class="statement">GIRLS AGED 18+. NO AI EXPERIENCE NEEDED. PHOTOGRAPHERS, DIRECTORS, DESIGNERS, WRITERS, CODERS, STYLISTS, CREATORS — AND ANYONE WITH TASTE</p>
-    </section>
-
-    <section id="how">
-      <p class="kicker">HOW TO JOIN</p>
-      <div class="boxes">
-        <div><span class="step">01</span><h3>APPLY</h3><p>Fill in the form, by yourself or as a team.</p></div>
-        <div><span class="step">02</span><h3>SELECTION</h3><p>Get a notification about the details.</p></div>
-        <div><span class="step">03</span><h3>CREATE</h3><p>Start your projects.</p></div>
-      </div>
+      <p class="aside"><b>ALL WEEKEND</b> Work zone · Chill zone · Food · Bubble tea and matcha bar · Ask SOUL desk</p>
+      <p class="note-small">Timing may change.</p>
     </section>
 
     <section id="faq">
-      <p class="kicker">FAQ</p>
+      <p class="kicker">QUESTIONS</p>
       <div class="faq-list">
         <details class="toggle"><summary>When and where is it?</summary><p>November 21–22 in Almaty. The venue will be announced soon.</p></details>
-        <details class="toggle"><summary>Is it free?</summary><p>Yes, it is free to join. Included: food, drinks and AI tools. Travel and accommodation are not included.</p></details>
+        <details class="toggle"><summary>Is it free?</summary><p>Yes, it is free to join. Included: food, drinks and AI tools.</p></details>
+        <details class="toggle"><summary>What language is the event in?</summary><p>Panels and workshops are in Russian and English. Mentors speak Russian, Kazakh, and English.</p></details>
+        <details class="toggle"><summary>Can I stay at the venue overnight?</summary><p>Yes. The venue stays open all night, with a chill zone if you need a break.</p></details>
         <details class="toggle"><summary>Who can apply?</summary><p>Girls aged 18+.</p></details>
         <details class="toggle"><summary>I don’t work in the creative industry. Can I apply?</summary><p>Yes. We care about your vision, taste and ideas, not your job title or resume.</p></details>
-        <details class="toggle"><summary>I don’t live in Almaty. Can I join?</summary><p>Yes, participants from other cities and countries are welcome. Travel and accommodation are not included.</p></details>
-        <details class="toggle"><summary>Do I need a portfolio?</summary><p>No, but you can add links to your work.</p></details>
-        <details class="toggle"><summary>I don’t have a team. Can I participate?</summary><p>Yes! You can participate solo or be matched with other participants to form a team.</p></details>
-        <details class="toggle"><summary>Can I apply with a friend? What is the maximum team size?</summary><p>Yes. You can apply solo or in a team of up to 4 people. Every team member must submit their own registration form and list each other as collaborators so we can review your application together.</p></details>
         <details class="toggle"><summary>I’ve never used AI before. Can I participate?</summary><p>Yes. You don’t need any prior technical experience with AI tools. The workshops and mentors on Day 1 will guide you through the tools you need to bring your concept to life.</p></details>
-        <details class="toggle"><summary>When do applications close?</summary><p>Main registration closes on Monday, November 16 at 11:59 PM. Official invites go out on November 18.</p></details>
+        <details class="toggle"><summary>Do I need a portfolio?</summary><p>No, but you can add links to your work.</p></details>
+        <details class="toggle"><summary>I don’t live in Almaty. Can I join?</summary><p>Yes, participants from other cities and countries are welcome.</p></details>
+        <details class="toggle"><summary>Can I apply with a friend? What is the maximum team size?</summary><p>Yes. You can apply solo or in a team of up to 4 people. Every team member must submit their own registration form and list each other as collaborators so we can review your application together.</p></details>
+        <details class="toggle"><summary>I don’t have a team. Can I find one at camp?</summary><p>Yes. Apply solo, and you can find teammates at registration or work on your own.</p></details>
+        <details class="toggle"><summary>When do applications close?</summary><p>We review applications on a rolling basis and send invites until November 20. Apply early, as spots are limited.</p></details>
+        <details class="toggle"><summary>How will I know if I’m selected?</summary><p>We’ll send your invite by email before November 20, with everything you need to know.</p></details>
         <details class="toggle"><summary>What if I’m not sure I can come on both days?</summary><p>Tell us as early as you can, because spots are limited.</p></details>
+        <details class="toggle"><summary>Do I get free access to Higgsfield, or do I need my own credits?</summary><p>Every participant gets free Higgsfield credits for the weekend. You don’t need a subscription.</p></details>
+        <details class="toggle"><summary>Can I use other AI tools?</summary><p>Yes. You can use any AI or editing tools, as long as Higgsfield is part of your workflow.</p></details>
+        <details class="toggle"><summary>Can I prepare anything before the brief drops?</summary><p>You can learn the tools and form your team in advance, but all project work starts after the brief drops at 14:00 on Day 1.</p></details>
+        <details class="toggle"><summary>How is the work judged, and who are the judges?</summary><p>A jury of the Higgsfield team and industry professionals scores each project on idea, taste, and execution. Judges will be announced before camp.</p></details>
       </div>
     </section>
 
-    <section>
+    <section id="closing" class="closing">
       <p class="prize-note">BRING YOUR TASTE, WE’LL TEACH THE SKILLS</p>
+      <a href="https://higgsfield.ai" class="apply" target="_blank" rel="noopener">APPLY</a>
     </section>
 
-    <section id="contact">
-      <p class="kicker">CONTACT</p>
-      <div class="boxes">
-        <div><h3>EMAIL</h3><p><a href="mailto:hello@example.com">hello@example.com</a></p></div>
-        <div><h3>INSTAGRAM</h3><p><a href="#">@soulcamp</a></p></div>
-        <div><h3>TELEGRAM</h3><p><a href="#">@soulcamp</a></p></div>
-      </div>
+    <section id="contact" class="contact-small">
+      <p class="contact-label">CONTACT</p>
+      <ul class="contact-list">
+        <li><span>Email</span><a href="mailto:hello@example.com">hello@example.com</a></li>
+        <li><span>Instagram</span><a href="https://instagram.com/higgsfield.soulcamp" target="_blank" rel="noopener">@higgsfield.soulcamp</a></li>
+        <li><span>Telegram</span><a href="#">@soulcamp</a></li>
+      </ul>
     </section>
 
     <div class="doc-foot">
@@ -296,7 +335,23 @@
     </div>
   </main>
 
+  <a href="https://higgsfield.ai" class="sticky-apply" id="stickyApply" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">APPLY</a>
+
   <script>
+    // Sticky APPLY (phones): visible only when neither APPLY button is on screen
+    (() => {
+      const sticky = document.getElementById('stickyApply');
+      const visible = new Set();
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
+        const show = visible.size === 0;
+        sticky.classList.toggle('show', show);
+        sticky.setAttribute('aria-hidden', String(!show));
+        sticky.tabIndex = show ? 0 : -1;
+      });
+      document.querySelectorAll('.hero .apply, .closing .apply').forEach(t => io.observe(t));
+    })();
+
     // Nav border on scroll
     const nav = document.getElementById('nav');
     addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 10), { passive: true });
