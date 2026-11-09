@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SOUL CAMP — Almaty, Nov 21–22</title>
+  <meta name="description" content="A creative training camp for girls to learn AI tools and compete in a 24-hour challenge. November 21–22, 2026, Almaty.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000'/%3E%3Ctext x='16' y='23' font-family='Helvetica,Arial' font-weight='700' font-size='18' text-anchor='middle' fill='%238fdde7'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="assets/trophy.png">
+  <!-- Link previews (Telegram, Instagram, WhatsApp…). Update the URLs if you use a custom domain. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SOUL CAMP — Almaty, Nov 21–22">
+  <meta property="og:description" content="A creative training camp for girls to learn AI tools and compete in a 24-hour challenge.">
+  <meta property="og:url" content="https://angrytengri.github.io/soulcamp/">
+  <meta property="og:image" content="https://angrytengri.github.io/soulcamp/assets/trophy.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #000;          /* page background */
+      --fg: #e8f6f8;       /* body text */
+      --cyan: #8fdde7;     /* SOUL CAMP logo colour — headings, buttons, accents */
+      --cyan-deep: #3fb6c6;
+      --muted: #7d989c;
+      --line: rgba(143, 221, 231, .18);
+      --panel: #061113;    /* registration background */
+      --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --serif: "Newsreader", Georgia, serif;
+      --gutter: clamp(16px, 4vw, 60px);
+      --section: clamp(80px, 12vw, 160px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body { overflow-x: clip; }
+    body { font-family: var(--sans); color: var(--fg); background: var(--bg); line-height: 1.4; -webkit-font-smoothing: antialiased; }
+    ::selection { background: var(--cyan); color: #000; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+
+    .wrap { padding: 0 var(--gutter); max-width: 1440px; margin-left: auto; margin-right: auto; }
+    section { margin-top: var(--section); scroll-margin-top: 60px; }
+    .apply-sec { scroll-margin-top: 0; }
+    h2 { font-size: clamp(36px, 6vw, 80px); font-weight: 700; letter-spacing: -0.045em; line-height: 1; text-transform: uppercase; color: var(--cyan); }
+    .lead { font-size: clamp(17px, 1.6vw, 22px); margin-top: 18px; max-width: 46ch; }
+
+    /* Photo placeholder — swap the div for an <img> when photos are ready */
+    .ph { background: radial-gradient(120% 120% at 70% 20%, #1b4a51 0%, #0b2226 55%, #050d0f 100%); border: 1px solid var(--line); width: 100%; position: relative; overflow: hidden; }
+    .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .ph::after { content: attr(data-label); position: absolute; left: 14px; bottom: 12px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--cyan); opacity: .7; }
+
+    /* NAV */
+    .nav { position: fixed; inset: 0 0 auto 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 16px var(--gutter); background: rgba(0,0,0,.6); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+    .nav.scrolled { border-color: var(--line); }
+    .nav .logo img { height: 18px; width: auto; }
+    .nav .links { display: flex; gap: 28px; font-size: 14px; }
+    .nav .links a { text-decoration: none; color: var(--fg); transition: color .2s; }
+    .nav .links a:hover { color: var(--cyan); }
+    .btn { display: inline-block; background: var(--cyan); color: #000; text-decoration: none; border: 0; cursor: pointer; font: inherit; font-weight: 600; padding: 10px 20px; border-radius: 999px; transition: background .2s, box-shadow .2s; }
+    .btn:hover { background: #b9eef5; box-shadow: 0 0 24px rgba(143,221,231,.45); }
+    @media (max-width: 760px) { .nav .links { display: none; } }
+
+    /* HERO — logo + apply on the left, trophy on the right */
+    .hero { min-height: 100svh; display: grid; grid-template-columns: 1fr 1.15fr; align-items: center; position: relative; padding: 70px var(--gutter) 0; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; right: -10%; top: 10%; width: 70%; aspect-ratio: 1; background: radial-gradient(circle, rgba(143,221,231,.12), transparent 60%); pointer-events: none; }
+    .hero .brand { display: flex; flex-direction: column; align-items: center; gap: clamp(18px, 2.4vw, 34px); position: relative; z-index: 1; }
+    .hero .brand h1 { width: min(100%, 740px); }
+    .hero .brand h1 img { width: 100%; height: auto; }
+    .hero .apply img { width: clamp(130px, 13vw, 237px); height: auto; transition: filter .25s, transform .25s; }
+    .hero .apply:hover img { filter: drop-shadow(0 0 14px rgba(143,221,231,.8)); transform: translateY(-2px); }
+    .hero .trophy { align-self: end; justify-self: end; width: 100%; max-width: 900px; position: relative; z-index: 1; animation: hover 7s ease-in-out infinite; }
+    .hero .trophy img { width: 100%; height: auto; }
+    .hero .foot { position: absolute; left: var(--gutter); bottom: 28px; display: flex; gap: 28px; flex-wrap: wrap; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); z-index: 2; }
+    .hero .foot b { color: var(--cyan); font-weight: 500; }
+    @keyframes hover { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; align-content: center; gap: 24px; padding-top: 96px; padding-bottom: 80px; }
+      .hero .trophy { justify-self: center; max-width: 520px; order: -1; }
+      .hero .brand h1 { width: min(100%, 520px); }
+      .hero .foot { left: 0; right: 0; justify-content: center; gap: 6px 20px; padding: 0 var(--gutter); font-size: 11px; }
+    }
+
+    /* TASTE */
+    .taste h2 { text-transform: none; font-size: clamp(40px, 8vw, 116px); letter-spacing: -0.05em; }
+    .taste .ph { aspect-ratio: 16 / 7; margin-top: 28px; }
+
+    /* WHAT IS */
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+    .grid3 .ph { aspect-ratio: 3 / 2; }
+    .grid3 h3 { font-size: clamp(22px, 2.2vw, 30px); margin-top: 12px; letter-spacing: -0.01em; }
+    .grid3 h3 { color: var(--cyan); }
+    .grid3 ul { list-style: none; margin-top: 8px; color: var(--fg); opacity: .8; }
+    @media (max-width: 760px) { .grid3 { grid-template-columns: 1fr; gap: 36px; } }
+
+    /* WHO CAN JOIN — orbit */
+    .who { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; }
+    .orbit-stage { position: relative; width: min(100%, 620px); aspect-ratio: 1; margin: 0 auto; }
+    .ring { position: absolute; inset: 9%; border-radius: 50%; animation: spin 60s linear infinite; }
+    .ring.inner { inset: 29%; animation-duration: 40s; animation-direction: reverse; }
+    .ring::before { content: ""; position: absolute; inset: 0; border: 1px dashed rgba(143,221,231,.35); border-radius: 50%; }
+    .orbit-stage:hover .ring, .orbit-stage:hover .name span { animation-play-state: paused; }
+    .name { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate(var(--a)) translateX(var(--r)) rotate(calc(-1 * var(--a))); }
+    .ring .name { --r: 41cqw; }
+    .orbit-stage { container-type: inline-size; }
+    .ring.inner .name { --r: 21cqw; }
+    .name span { position: absolute; translate: -50% -50%; white-space: nowrap; display: block; animation: spin 60s linear infinite reverse; }
+    .ring.inner .name span { animation-duration: 40s; animation-direction: normal; }
+    .name b { display: inline-block; background: var(--cyan); color: #000; font-weight: 600; box-shadow: 0 0 18px rgba(143,221,231,.25); font-size: clamp(13px, 1.4vw, 18px); padding: 8px 16px; border-radius: 999px; transition: background .2s, color .2s; animation: float 4s ease-in-out infinite; animation-delay: var(--d, 0s); }
+    .ring.inner .name b { background: #000; color: var(--cyan); border: 1px solid var(--cyan); box-shadow: none; font-weight: 500; }
+    .name b:hover { background: #fff; color: #000; }
+    .orbit-center { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; pointer-events: none; }
+    .orbit-center p { font-family: var(--serif); font-size: clamp(22px, 3vw, 38px); line-height: 1.05; font-style: italic; color: var(--cyan); text-shadow: 0 0 24px rgba(143,221,231,.5); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes float { 0%, 100% { translate: 0 -4px; } 50% { translate: 0 4px; } }
+    @media (max-width: 900px) { .who { grid-template-columns: 1fr; } .orbit-stage { width: min(100%, 460px); } .ring .name { --r: 38cqw; } .name b { padding: 6px 12px; } }
+    @media (max-width: 560px) { .ring.inner { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .ring, .name span, .name b, .hero .trophy { animation: none !important; } }
+
+    /* WHAT YOU GET */
+    .perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px 40px; margin-top: 64px; }
+    .perks h3 { font-size: clamp(22px, 2.4vw, 34px); letter-spacing: -0.01em; color: var(--cyan); }
+    .perks p { margin-top: 6px; max-width: 26ch; font-size: 17px; }
+    @media (max-width: 760px) { .perks { grid-template-columns: 1fr 1fr; gap: 36px 20px; } }
+
+    /* HOW TO JOIN + SCHEDULE */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 56px; border-top: 1px solid var(--cyan); }
+    .steps div { padding-top: 20px; }
+    .steps .n { font-size: 14px; color: var(--cyan); }
+    .steps h3 { font-family: var(--serif); font-weight: 600; font-size: 24px; margin-top: 8px; color: #fff; }
+    .steps p { font-family: var(--serif); font-size: 19px; margin-top: 6px; max-width: 32ch; }
+    @media (max-width: 760px) { .steps { grid-template-columns: 1fr; gap: 8px; } }
+
+    .schedule { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 56px; }
+    .day h3 { font-size: 22px; padding-bottom: 12px; border-bottom: 1px solid var(--cyan); color: var(--cyan); }
+    .day ul { list-style: none; }
+    .day li { display: flex; gap: 24px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 18px; }
+    .day li time { width: 56px; flex: none; font-variant-numeric: tabular-nums; color: var(--muted); }
+    .allweekend { margin-top: 32px; font-size: 18px; max-width: 60ch; }
+    .note { font-family: var(--serif); color: var(--muted); margin-top: 10px; }
+    @media (max-width: 760px) { .schedule { grid-template-columns: 1fr; } }
+
+    /* APPLY FORM */
+    .apply-sec { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: var(--section); padding: var(--section) 0; position: relative; overflow: hidden; }
+    .apply-sec::before { content: ""; position: absolute; left: 50%; top: -30%; width: 900px; max-width: 120vw; aspect-ratio: 1; translate: -50% 0; background: radial-gradient(circle, rgba(143,221,231,.10), transparent 60%); pointer-events: none; }
+    .apply-sec .wrap { position: relative; }
+    .apply-sec .head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+    .deadline { font-family: var(--serif); font-size: 19px; max-width: 34ch; }
+    form { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px 32px; max-width: 980px; }
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .field.full { grid-column: 1 / -1; }
+    label, legend { font-size: 14px; font-weight: 500; }
+    .hint { font-weight: 400; color: var(--muted); }
+    input[type=text], input[type=email], input[type=tel], input[type=url], select, textarea {
+      font: inherit; font-size: 17px; padding: 14px 0; border: 0; border-bottom: 1px solid rgba(232,246,248,.4); background: transparent; color: var(--fg); border-radius: 0; outline: none; width: 100%;
+    }
+    input::placeholder { color: var(--muted); }
+    select option { background: #000; color: var(--fg); }
+    input:focus, select:focus, textarea:focus { border-color: var(--cyan); }
+    textarea { resize: vertical; min-height: 110px; }
+    fieldset { border: 0; display: flex; flex-direction: column; gap: 12px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chips label { cursor: pointer; }
+    .chips input { position: absolute; opacity: 0; pointer-events: none; }
+    .chips span { display: inline-block; padding: 10px 20px; border: 1px solid rgba(232,246,248,.4); border-radius: 999px; font-size: 16px; font-weight: 400; transition: all .15s; }
+    .chips label:hover span { border-color: var(--cyan); }
+    .chips input:checked + span { background: var(--cyan); border-color: var(--cyan); color: #000; font-weight: 500; }
+    .chips input:focus-visible + span { outline: 2px solid var(--cyan); outline-offset: 2px; }
+    .check { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; font-weight: 400; cursor: pointer; }
+    .check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--cyan); flex: none; }
+    #teamField[hidden] { display: none; }
+    .submit-row { grid-column: 1 / -1; display: flex; align-items: center; gap: 20px; margin-top: 12px; flex-wrap: wrap; }
+    .submit-row .btn { font-size: 18px; padding: 16px 40px; }
+    .thanks { display: none; margin-top: 48px; max-width: 640px; }
+    .thanks h3 { font-size: clamp(28px, 4vw, 48px); letter-spacing: -0.03em; color: var(--cyan); }
+    .thanks p { font-family: var(--serif); font-size: 20px; margin-top: 12px; }
+    .done form { display: none; }
+    .done .thanks { display: block; }
+    @media (max-width: 760px) { form { grid-template-columns: 1fr; } }
+
+    /* FAQ */
+    .faq { max-width: 900px; margin-top: 48px; }
+    .faq details { border-bottom: 1px solid var(--line); }
+    .faq details:first-child { border-top: 1px solid var(--line); }
+    .faq summary:hover, .faq details[open] summary { color: var(--cyan); }
+    .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 20px; padding: 22px 0; font-family: var(--serif); font-weight: 600; font-size: clamp(19px, 2vw, 24px); }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; font-family: var(--sans); font-weight: 300; font-size: 28px; line-height: 1; color: var(--cyan); transition: transform .2s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq details p { font-family: var(--serif); font-size: 19px; padding: 0 0 24px; max-width: 62ch; }
+
+    /* CONTACT / FOOTER */
+    footer { margin-top: var(--section); padding-bottom: 32px; }
+    .contact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 40px; font-size: 18px; }
+    .contact span { display: block; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+    .contact a { text-decoration: none; border-bottom: 1px solid currentColor; color: var(--cyan); }
+    .bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+    .bottom img { height: 16px; width: auto; }
+    .bottom .by { font-family: var(--serif); font-size: 20px; color: var(--fg); }
+    @media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <a href="#top" class="logo"><img src="assets/soul-camp.png" alt="SOUL CAMP"></a>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#who">Who</a>
+      <a href="#categories">Categories</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#apply" class="btn">Apply</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="brand">
+      <h1><img src="assets/soul-camp.png" alt="SOUL CAMP" width="740" height="103"></h1>
+      <a href="#apply" class="apply"><img src="assets/apply.png" alt="Apply" width="237" height="59"></a>
+    </div>
+    <div class="trophy"><img src="assets/trophy.png" alt="" width="1475" height="1097"></div>
+    <div class="foot">
+      <span><b>Nov 21–22, 2026</b> · Almaty</span>
+      <span id="countdown">Starts in — days — hours — minutes</span>
+      <span>by Higgsfield</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- TASTE -->
+    <section class="taste wrap">
+      <h2>bring your taste,<br>we’ll teach the skills</h2>
+      <div class="ph" data-label="Hero photo"></div>
+    </section>
+
+    <!-- WHAT IS -->
+    <section class="wrap" id="about">
+      <h2>What is SOUL CAMP</h2>
+      <p class="lead">Two days. One 24-hour challenge. Learn AI tools from professionals, then make a short film, a fashion campaign or a new product from scratch.</p>
+      <div class="grid3">
+        <div><div class="ph" data-label="Photo"></div><h3>learn</h3></div>
+        <div><div class="ph" data-label="Photo"></div><h3>create</h3></div>
+        <div><div class="ph" data-label="Photo"></div><h3>present</h3></div>
+      </div>
+    </section>
+
+    <!-- WHO CAN JOIN -->
+    <section class="wrap" id="who">
+      <div class="who">
+        <div>
+          <h2>Who can join</h2>
+          <p class="lead">Girls aged 18+. No AI experience needed.</p>
+          <p class="lead" style="color:var(--muted)">Photographers, directors, designers, writers, coders, stylists, creators — and anyone with taste.</p>
+        </div>
+        <div class="orbit-stage" aria-label="Photographers, directors, designers, writers, coders, stylists, creators, and anyone with taste">
+          <div class="ring" id="outerRing"></div>
+          <div class="ring inner" id="innerRing"></div>
+          <div class="orbit-center"><p>anyone<br>with taste</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="wrap" id="categories">
+      <h2>Categories</h2>
+      <p class="lead">Pick one and compete solo or gather a team.</p>
+      <div class="grid3">
+        <div>
+          <div class="ph" data-label="Film photo"></div>
+          <h3>film</h3>
+          <ul><li>series</li><li>animation</li><li>short film</li></ul>
+        </div>
+        <div>
+          <div class="ph" data-label="Fashion photo"></div>
+          <h3>fashion</h3>
+          <ul><li>360-degree campaign</li><li>collection</li><li>lookbook</li><li>set design</li><li>short film</li></ul>
+        </div>
+        <div>
+          <div class="ph" data-label="Tech photo"></div>
+          <h3>tech</h3>
+          <ul><li>a new product</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT YOU GET -->
+    <section class="wrap">
+      <h2>What you get</h2>
+      <div class="perks">
+        <div><h3>new skills</h3><p>create with AI</p></div>
+        <div><h3>a finished project</h3><p>turn an idea into a real project in one weekend</p></div>
+        <div><h3>mentorship</h3><p>guidance and feedback from industry professionals</p></div>
+        <div><h3>connections</h3><p>meet creatives and make friends</p></div>
+        <div><h3>opportunities</h3><p>get noticed by industry professionals</p></div>
+        <div><h3>prizes</h3><p>top 3 in each category, plus special contests</p></div>
+      </div>
+    </section>
+
+    <!-- HOW TO JOIN -->
+    <section class="wrap">
+      <h2>How to join</h2>
+      <div class="steps">
+        <div><span class="n">01</span><h3>Come solo or with a team</h3><p>Bring different skills and one shared vision.</p></div>
+        <div><span class="n">02</span><h3>Apply</h3><p>Fill in the form. No AI experience needed.</p></div>
+        <div><span class="n">03</span><h3>Get selected</h3><p>If selected, you get an invitation to SOUL CAMP on November 18.</p></div>
+      </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section class="wrap" id="schedule">
+      <h2>Schedule</h2>
+      <div class="schedule">
+        <div class="day">
+          <h3>Day 1 · November 21</h3>
+          <ul>
+            <li><time>10:00</time>registration and tastings</li>
+            <li><time>11:30</time>panel and workshops</li>
+            <li><time>14:00</time>the challenge starts</li>
+            <li><time>19:00</time>sessions with mentors</li>
+          </ul>
+        </div>
+        <div class="day">
+          <h3>Day 2 · November 22</h3>
+          <ul>
+            <li><time>14:00</time>finish and submit</li>
+            <li><time>17:00</time>project showcase and feedback</li>
+            <li><time>20:00</time>awards</li>
+            <li><time>21:00</time>afterparty</li>
+          </ul>
+        </div>
+      </div>
+      <p class="allweekend"><strong>All weekend:</strong> work zone, chill zone, food zone, bubble tea and matcha station, and a desk to ask the SOUL team anything.</p>
+      <p class="note">*timing may change</p>
+    </section>
+
+    <!-- APPLY / REGISTRATION -->
+    <section class="apply-sec" id="apply">
+      <div class="wrap" id="applyWrap">
+        <div class="head">
+          <h2>Apply</h2>
+          <p class="deadline">Applications close Monday, November 16 at 11:59 PM. Invites go out November 18.</p>
+        </div>
+
+        <!-- TODO: connect to a backend (Formspree, Google Forms, Tally, Airtable…) by setting action="" and method="POST" -->
+        <form id="applyForm" novalidate>
+          <div class="field">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="phone">Phone or Telegram</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+          <div class="field">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required>
+          </div>
+
+          <fieldset class="field full">
+            <legend>Category</legend>
+            <div class="chips">
+              <label><input type="radio" name="category" value="film" required><span>Film</span></label>
+              <label><input type="radio" name="category" value="fashion"><span>Fashion</span></label>
+              <label><input type="radio" name="category" value="tech"><span>Tech</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="role">What do you do?</label>
+            <select id="role" name="role" required>
+              <option value="">Choose one</option>
+              <option>Photographer</option><option>Director</option><option>Designer</option>
+              <option>Writer</option><option>Coder</option><option>Stylist</option>
+              <option>Creator</option><option>Something else</option>
+            </select>
+          </div>
+
+          <fieldset class="field">
+            <legend>Solo or team?</legend>
+            <div class="chips">
+              <label><input type="radio" name="team" value="solo" required checked><span>Solo</span></label>
+              <label><input type="radio" name="team" value="team"><span>Team</span></label>
+              <label><input type="radio" name="team" value="match"><span>Match me</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field full" id="teamField" hidden>
+            <label for="teammates">Teammates <span class="hint">— up to 3 names. Each of them must submit their own form too.</span></label>
+            <input type="text" id="teammates" name="teammates">
+          </div>
+
+          <div class="field full">
+            <label for="links">Links to your work <span class="hint">— optional, no portfolio needed</span></label>
+            <input type="url" id="links" name="links" placeholder="instagram.com/…">
+          </div>
+
+          <div class="field full">
+            <label for="why">Why do you want to join?</label>
+            <textarea id="why" name="why" required></textarea>
+          </div>
+
+          <div class="field full">
+            <label class="check"><input type="checkbox" name="age" required> I am 18 or older</label>
+            <label class="check"><input type="checkbox" name="bothdays" required> I can attend both days, November 21–22</label>
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="btn">Submit application</button>
+            <span class="hint" id="formMsg" role="status"></span>
+          </div>
+        </form>
+
+        <div class="thanks" role="status">
+          <h3>Thank you — you’re in the queue.</h3>
+          <p>We’ll review your application and send invitations on November 18. Keep an eye on your inbox.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="wrap" id="faq">
+      <h2>FAQ</h2>
+      <div class="faq">
+        <details><summary>When and where is it?</summary><p>November 21–22 in Almaty. The venue will be announced soon.</p></details>
+        <details><summary>Is it free?</summary><p>Yes, it is free to join. Included: food, drinks, AI tools, travel and accommodation.</p></details>
+        <details><summary>Who can apply?</summary><p>Girls aged 18+.</p></details>
+        <details><summary>I don’t work in the creative industry. Can I apply?</summary><p>Yes. We care about your vision, taste and ideas, not your job title or resume.</p></details>
+        <details><summary>I don’t live in Almaty. Can I join?</summary><p>Yes, participants from other cities and countries are welcome. [Placeholder — confirm travel and accommodation details.]</p></details>
+        <details><summary>Do I need a portfolio?</summary><p>No, but you can add links to your work.</p></details>
+        <details><summary>I don’t have a team. Can I participate?</summary><p>Yes! You can participate solo or be matched with other participants to form a team.</p></details>
+        <details><summary>Can I apply with a friend? What is the maximum team size?</summary><p>Yes. You can apply solo or in a team of up to 4 people. Every team member must submit their own registration form and list each other as collaborators so we can review your application together.</p></details>
+        <details><summary>I’ve never used AI before. Can I participate?</summary><p>Yes. You don’t need any prior technical experience with AI tools. The workshops and mentors on Day 1 will guide you through the tools you need to bring your concept to life.</p></details>
+        <details><summary>When do applications close?</summary><p>Main registration closes on Monday, November 16 at 11:59 PM. Official invites go out on November 18.</p></details>
+        <details><summary>What if I’m not sure I can come on both days?</summary><p>Tell us as early as you can, because spots are limited.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <!-- CONTACT -->
+  <footer class="wrap" id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      <div><span>Email</span><a href="mailto:hello@example.com">hello@example.com</a></div>
+      <div><span>Instagram</span><a href="#">@soulcamp</a></div>
+      <div><span>Telegram</span><a href="#">@soulcamp</a></div>
+    </div>
+    <div class="bottom">
+      <span style="display:flex;align-items:center;gap:12px"><img src="assets/soul-camp.png" alt="SOUL CAMP"> Almaty · 2026</span>
+      <span class="by">by Higgsfield</span>
+    </div>
+  </footer>
+
+  <script>
+    // Nav border on scroll
+    const nav = document.getElementById('nav');
+    addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 10), { passive: true });
+
+    // Countdown to Nov 21, 2026 10:00 Almaty time (UTC+5)
+    const start = new Date('2026-11-21T10:00:00+05:00');
+    const cd = document.getElementById('countdown');
+    function tick() {
+      let ms = start - new Date();
+      if (ms <= 0) { cd.textContent = 'SOUL CAMP is happening now'; return; }
+      const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
+      cd.textContent = `Starts in ${d} days ${h} hours ${m} minutes`;
+    }
+    tick(); setInterval(tick, 30000);
+
+    // Orbit of roles
+    const outer = ['Photographers', 'Directors', 'Designers', 'Writers', 'Coders', 'Stylists', 'Creators', 'Artists'];
+    const inner = ['Dreamers', 'Editors', 'Illustrators', 'Makers', 'Storytellers'];
+    function fill(ring, names) {
+      names.forEach((n, i) => {
+        const el = document.createElement('div');
+        el.className = 'name';
+        el.style.setProperty('--a', (360 / names.length * i) + 'deg');
+        el.innerHTML = `<span><b style="--d:${(i * -0.7).toFixed(1)}s">${n}</b></span>`;
+        ring.appendChild(el);
+      });
+    }
+    fill(document.getElementById('outerRing'), outer);
+    fill(document.getElementById('innerRing'), inner);
+
+    // Form
+    const form = document.getElementById('applyForm');
+    const teamField = document.getElementById('teamField');
+    form.addEventListener('change', e => {
+      if (e.target.name === 'team') teamField.hidden = e.target.value !== 'team';
+    });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const msg = document.getElementById('formMsg');
+      if (!form.checkValidity()) {
+        msg.textContent = 'Please fill in all required fields.';
+        form.querySelector(':invalid')?.focus();
+        return;
+      }
+      // TODO: send data to your backend here, e.g.
+      // fetch('https://formspree.io/f/XXXX', { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+      document.getElementById('applyWrap').classList.add('done');
+      document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
